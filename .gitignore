@@ -8,5 +8,9 @@
 /dataSources.local.xml
 
 .idea/
-data/
+data_embeddings/
 test.py
+data/
+*.json
+/json_info/
+*.csv
