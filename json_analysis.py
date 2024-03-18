@@ -1,6 +1,8 @@
 import json
 import csv
 
+
+# Make a csv table with the occurrences of each family name in the JSON file
 def analyze_table(file_name):
     import csv
     from collections import Counter
@@ -32,7 +34,7 @@ def analyze_table(file_name):
             writer.writerow([family, count, i])
 
 
-
+# Make a CSV table containing the data from the JSON file, with the columns 'name', 'tokens', and 'family_name'
 def make_table(file_name):
     # Load the JSON data from the file
     full_file_name = f'data/{file_name}.json'
@@ -47,12 +49,11 @@ def make_table(file_name):
     with open(f'json_info/table_for_{file_name}.csv', 'w', newline='') as file:
 
         writer = csv.writer(file)
-        # Write the header row
 
-        # Loop over the JSON data and write each row to the CSV
+        # Write the header row
         writer.writerow(['name', 'tokens', 'family_name'])
 
-        # Inside the loop, calculate the length of embeddings and write it to the CSV along with other attributes
+        # Loop over the JSON data and write each row to the CSV
         for name, attributes in data.items():
             writer.writerow([name, attributes['tokens'], attributes['family_name']])
 
@@ -63,6 +64,9 @@ def make_table(file_name):
 
 #name = "behavior-features"
 name = "static_features"
-analyze_table(name)
 
-# write_table(name)
+# run this to get a table in json_info/family_counts_for_{name}.csv
+# this will later be used to get the labels
+# make_table(name)
+# analyze_table(name)
+

@@ -2,8 +2,12 @@ import json
 
 name = 'static_features'
 input_file= f'data/{name}.json'
-output_file = f'data/simple_{name}.json'
 
+
+# If you want the full dataset
+full = False
+
+output_file = f'data/full_{name}.json' if full else f'data/simple_{name}.json'
 
 # Define the desired families you want to keep in your new CSV
 desired_families = ['BlisterLoader', 'Necurs', 'Gamaredon', 'Limerat', 'RaccoonStealer']
@@ -14,7 +18,7 @@ with open(input_file, 'r') as file:
 
 simplified_data = []
 for name, details in data.items():
-    if details.get('family_name') in desired_families:
+    if full or details.get('family_name') in desired_families:
         simplified_data.append({
             "name": name,
             "features_json": details.get('features_json'),
