@@ -1,7 +1,7 @@
 # explicit
 version = "simple"               # "simple" or "full"
 file_name = "static_features"   # "behavior_features" or "static_features"
-model_short_name = "longformer"       # "bert" or "longformer"
+model_short_name = "bert"       # "bert" or "longformer"
 
 # local_model = "checkpoints/bert_2024-03-18-10-28-35/checkpoint_epoch_6.pth.tar"
 local_model = None              # None if you want to use the model from the Hugging Face model hub
@@ -14,7 +14,7 @@ models = {
 
 hyperparams = {
     "model_name": models[model_short_name],
-    "max_length": 128 if model_short_name == "bert" else 4096,
+    "max_length": 512 if model_short_name == "bert" else 4096,
     "batch_size": 5,
     "lr": 5e-4,
     "epochs": 5,
