@@ -11,10 +11,9 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 from format_json_data import desired_families
 from settings import hyperparams as params, version, file_name, json_path, model_short_name, local_model, test_only
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(torch.cuda.is_available())
+device = torch.device("cuda")
 checkpoint_dir = f'checkpoints/{model_short_name}_{time.strftime("%Y-%m-%d-%H-%M-%S")}'
-
 
 # Dataaset Class
 class MalwareDataset(Dataset):
@@ -34,7 +33,7 @@ class MalwareDataset(Dataset):
 
 # Gets the data from the fromatted json file and returns a training and test set
 def get_data(categories):
-    with open(json_path, 'r') as file:
+    with open(json_path, 'r', encoding='utf-8-sig') as file:
         data = json.load(file)
 
     inverted_categories = {v: k for k, v in categories.items()}
@@ -44,10 +43,11 @@ def get_data(categories):
     for details in data:
         index = inverted_categories[details.get('family_name')]
         features = details.get('features_json')
+        # print(features)
         data_list.append((features, index))
-
     # shuffle the data
     random.shuffle(data_list)
+    # print(data_list)
 
     # Split the data into a training and test set give the training set size
     split = int(len(data_list) * params["training_set_size"])
@@ -61,6 +61,7 @@ def get_data(categories):
 # Processes the data into a form the transfomrer can understand and returns a MalwareDataset
 def process_data(data, tokenizer):
     data_texts, data_labels = zip(*data)
+    # print(data_texts)
     data_encodings = tokenizer(list(data_texts), truncation=True, padding=True, max_length=params["max_length"])
     return MalwareDataset(data_encodings, list(data_labels))
 
@@ -72,6 +73,7 @@ def get_categories(simple):
 
     # Initialize an empty dictionary
     categories = {}
+
 
     # Open the CSV file
     with open(csv_file_path, mode='r', encoding='utf-8') as file:
@@ -94,7 +96,6 @@ def get_categories(simple):
 
             # Add the family name to the dictionary with the index as its key
             categories[index] = family_name
-
     return categories
 
 
@@ -154,9 +155,9 @@ def run():
     optimizer = torch.optim.AdamW(model.parameters(), lr=params["lr"])
 
     # If a local model should be ran intead of the model from the Hugging Face model hub
-    if local_model is not None:
-        print(f"Loading local model {local_model}" )
-        model, optimizer = load_checkpoint(local_model, model, optimizer, device)
+    # if local_model is not None:
+    #     print(f"Loading local model {local_model}" )
+    #     model, optimizer = load_checkpoint(local_model, model, optimizer, device)
 
     # make sure it runs on cuda
     model.to(device)

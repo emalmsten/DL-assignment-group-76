@@ -54,19 +54,19 @@ def make_table(file_name):
         writer.writerow(['name', 'tokens', 'family_name'])
 
         # Loop over the JSON data and write each row to the CSV
-        for name, attributes in data.items():
-            writer.writerow([name, attributes['tokens'], attributes['family_name']])
+        for attributes in data:
+            writer.writerow([attributes['SHA'], 0, attributes['Family Name']])
 
     print("done")
 
 
 
 
-#name = "behavior-features"
-name = "static_features"
+name = "behavior_features"
+# name = "static_features"
 
 # run this to get a table in json_info/family_counts_for_{name}.csv
 # this will later be used to get the labels
 # make_table(name)
-# analyze_table(name)
+analyze_table(name)
 

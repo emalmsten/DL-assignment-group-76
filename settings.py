@@ -1,6 +1,6 @@
 # explicit
 version = "simple"               # "simple" or "full"
-file_name = "static_features"   # "behavior_features" or "static_features"
+file_name = "behavior_features"   # "behavior_features" or "static_features"
 model_short_name = "bert"       # "bert" or "longformer"
 
 # local_model = "checkpoints/bert_2024-03-18-10-28-35/checkpoint_epoch_6.pth.tar"
