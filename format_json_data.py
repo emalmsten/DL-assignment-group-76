@@ -17,13 +17,24 @@ with open(input_file, 'r') as file:
     data = json.load(file)
 
 simplified_data = []
-for details in data:
-    if full or details.get('Family Name') in desired_families:
-        simplified_data.append({
-            "name": str(details.get('SHA')),
-            "features_json": str(details.get('Behavior')),
-            "family_name": str(details.get('Family Name'))
-        })
+
+if name == 'static_features':
+    for name, details in data.items():
+        if full or details.get('family_name') in desired_families:
+            simplified_data.append({
+                "name": name,
+                "features_json": details.get('features_json'),
+                "family_name": details.get('family_name')
+            })
+
+elif name == 'behavior_features':
+    for details in data:
+        if full or details.get('Family Name') in desired_families:
+            simplified_data.append({
+                "name": str(details.get('SHA')),
+                "features_json": str(details.get('Behavior')),
+                "family_name": str(details.get('Family Name'))
+            })
 
 
 # Write the filtered data to a new JSON file

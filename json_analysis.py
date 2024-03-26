@@ -53,9 +53,14 @@ def make_table(file_name):
         # Write the header row
         writer.writerow(['name', 'tokens', 'family_name'])
 
+        if file_name == 'static_features':
+            for name, attributes in data.items():
+                writer.writerow([name, attributes['tokens'], attributes['family_name']])
+
         # Loop over the JSON data and write each row to the CSV
-        for attributes in data:
-            writer.writerow([attributes['SHA'], 0, attributes['Family Name']])
+        elif file_name == 'behavior_features':
+            for attributes in data:
+                writer.writerow([attributes['SHA'], 0, attributes['Family Name']])
 
     print("done")
 
