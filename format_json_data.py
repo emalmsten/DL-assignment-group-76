@@ -38,7 +38,7 @@ elif name == 'behavior_features':
 
 
 # Write the filtered data to a new JSON file
-with open(output_file, 'w', encoding='utf-8-sig') as file:
+with open(output_file, 'w') as file:
     json.dump(simplified_data, file, indent=4)
 
 print('Filtered JSON has been written to filtered.json')
