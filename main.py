@@ -177,7 +177,7 @@ def run():
     if not test_only:
         os.makedirs(checkpoint_dir, exist_ok=True)
         train(model, optimizer, training_set)
-    test(model, test_set)
+    run_test(model, test_set)
 
 
 def train(model, optimizer, training_set):
@@ -226,7 +226,7 @@ def train(model, optimizer, training_set):
     save_checkpoint(model, optimizer, filename="final_checkpoint.pth.tar")
 
 
-def test(model, test_set):
+def run_test(model, test_set):
     # Put the model in evaluation mode
     model.eval()
     print("Testing...")
