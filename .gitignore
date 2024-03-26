@@ -15,3 +15,4 @@ data/
 /json_info/
 *.csv
 /checkpoints
+__pycache__/
