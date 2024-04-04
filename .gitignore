@@ -15,4 +15,7 @@ data/
 /json_info/
 *.csv
 /checkpoints
+
+/extractor
+/token_analyzer
 __pycache__/
