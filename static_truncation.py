@@ -4,13 +4,22 @@ from collections import defaultdict
 from token_analyzer.gpt_tokenizer import GptTokenizer
 from math import floor, log10
 
+def make_small_static():
+    with open('data/static_features.json', 'r') as file:
+        data = json.load(file)
+
+    # take the 100 first entries
+    new_data = {k: v for k, v in list(data.items())[:100]}
+
+    with open('data/small_static_features.json', 'w') as file:
+        json.dump(new_data, file, indent=4)
 
 def binning(features):
     # Calculate bin counts
     bin_counts = recursive_bin_count(features, start=True)
 
     # Threshold for filtering
-    l_threshold = 300
+    l_threshold = len(features) * 0.5
     u_threshold = len(features)
 
     # Filter the data
@@ -112,35 +121,53 @@ def print_token_info(data):
     return tokens_above_512
 
 t = GptTokenizer()
-json_file = 'data/simple_static_features.json'
-with open(json_file, 'r') as file:
-    data_list = json.load(file)
-    # take a subset of the data
-    # for all entries in the json list, take the features
-    features = [json.loads(entry['features_json']) for entry in data_list]
-    print_token_info(features)
 
-    features = [round_numbers(feature) for feature in features]
-    features = remove_undesirable_keys(features, ["Opcodes"])
-    features = shorten_keys(features)
+def truncate(name, context_length=512):
+    input_file = f'data/{name}.json'
+    output_file = f'data/truncated_{name}.json'
 
-    tokens_above_512 = print_token_info(features)
+    with open(input_file, 'r') as file:
+        data = json.load(file)
+        print(f"Loaded {len(data)} entries")
+        # for all entries in the json list, take the features
+        features = [v["features_json"] for k, v in data.items()]
+        features = [json.loads(entry) for entry in features]
 
-    occurences = binning(features)
-    occ_keys = [list(occ.keys())[0] for occ in occurences]
-    chunk = 5
-    # remove 10 entires from the list at the time until the amount of tokens above 512 is 0
-    while len(tokens_above_512) > 0 and len(occ_keys) > 0:
-        undersirables = occ_keys[:chunk]
-        occ_keys = occ_keys[chunk:]
+        print_token_info(features)
 
-        features = remove_undesirable_keys(features, undersirables)
+        features = [round_numbers(feature) for feature in features]
+        features = remove_undesirable_keys(features, ["Opcodes"])
+        features = shorten_keys(features)
 
-        tokens = [t.num_tokens_from_string(json.dumps(feature, separators=(',', ':'))) for feature in features]
-        tokens_above_512 = [token for token in tokens if token > 512]
+        print_token_info(features)
+
+        occurences = binning(features)
+        occ_keys = [list(occ.keys())[0] for occ in occurences]
+        chunk = 1
+        print("First part done")
+
+        while True:
+            tokens = [t.num_tokens_from_string(json.dumps(feature, separators=(',', ':')).replace('"', '')) for feature in features]
+            tokens_above_context_length = [token for token in tokens if token > context_length]
+
+            if len(tokens_above_context_length) == 0 or len(occ_keys) == 0:
+                break
+
+            undersirables = occ_keys[:chunk]
+            occ_keys = occ_keys[chunk:]
+
+            features = remove_undesirable_keys(features, undersirables)
+
+        features_strings = [json.dumps(feature, separators=(',', ':')).replace('"', '') for feature in features]
+        print(features_strings[:5])
+        for i, (k,v) in enumerate(data.items()):
+            v["features_json"] = features_strings[i]
+
+        with open(output_file, 'w') as file:
+            json.dump(data, file, indent=4)
 
 
-    print_token_info(features)
-
+# make_small_static()
+truncate("small_static_features", 512)
 
 
