@@ -339,7 +339,7 @@ def all_truncs(behaviors):
 
 def truncate(name, context_size):
     input_file = f'data/{name}.json'
-    output_file = f'data/{name}_truncated.json'
+    output_file = f'data/truncated_{name}_to_{context_size}.json'
 
     # Load the original JSON data
     with open(input_file, 'r') as file:

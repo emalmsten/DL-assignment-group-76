@@ -124,7 +124,7 @@ t = GptTokenizer()
 
 def truncate(name, context_length=512):
     input_file = f'data/{name}.json'
-    output_file = f'data/truncated_{name}.json'
+    output_file = f'data/truncated_{name}_to_{context_length}.json'
 
     with open(input_file, 'r') as file:
         data = json.load(file)
@@ -144,9 +144,11 @@ def truncate(name, context_length=512):
         occurences = binning(features)
         occ_keys = [list(occ.keys())[0] for occ in occurences]
         chunk = 1
-        print("First part done")
+        print("First truncation done")
+        cnt = 0
 
         while True:
+
             tokens = [t.num_tokens_from_string(json.dumps(feature, separators=(',', ':')).replace('"', '')) for feature in features]
             tokens_above_context_length = [token for token in tokens if token > context_length]
 
@@ -157,6 +159,8 @@ def truncate(name, context_length=512):
             occ_keys = occ_keys[chunk:]
 
             features = remove_undesirable_keys(features, undersirables)
+            cnt += 1
+            print(f"{cnt} small truncations performed")
 
         features_strings = [json.dumps(feature, separators=(',', ':')).replace('"', '') for feature in features]
         print(features_strings[:5])
@@ -168,6 +172,6 @@ def truncate(name, context_length=512):
 
 
 # make_small_static()
-truncate("small_static_features", 512)
+truncate("static_features", 512)
 
 
