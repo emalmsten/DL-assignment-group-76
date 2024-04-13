@@ -1,0 +1,11 @@
+Accuracies: [0.4045, 0.3855, 0.3713, 0.4232, 0.4026]
+Average: 0.397
+Standard deviation: 0.020
+Standard error of the mean: 0.009
+Best accuracy: 0.4232
+
+Losses: [5.5136, 5.5482, 5.5496, 5.4891, 5.5033]
+Average: 5.5208
+Standard deviation: 0.0271
+Standard error of the mean: 0.0121
+Best Loss: 5.4891
