@@ -1,3 +1,10 @@
+# Comparing Longformer and BERT in static and dynamic malware analysis
+Arnav Chopra, 5234786, A.Chopra-1@student.tudelft.nl
+
+Casper Dekeling, 5275881, C.R.Dekeling@student.tudelft.nl
+
+Emil Malmsten, xxxxxxx, xxxxx@student.tudelft.nl
+
 ## Introduction
 As technology develops, so does malware. Malware is continuously evolving, with small mutations and obfuscations constantly being added to existing malware to make more malware that is harder to detect. However, this means that most malware has evolved from one of relatively few families of malware. As seen in [1], where malware is visualised as gray-scale images, all the malware within such a family still has a lot in common. Knowing what family every piece of malware originated from would help us understand how these families evolve to generate new malware, which in turn will help us detect new malware. 
 
