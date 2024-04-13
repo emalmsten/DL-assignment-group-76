@@ -221,18 +221,18 @@ For the Longformer model, training the model was not feasible within Kaggle’s 
 
 | Fold                | Accuracy (BERT) | Accuracy (LF) | Loss (BERT) | Loss (LF)  |
 |---------------------|-----------------|---------------|-------------|------------|
-| Fold 1              | 0.850           | 0.865         | 1.665       | 1.088      |
-| Fold 2              | 0.800           | 0.840         | 2.248       | 1.090      |
-| Fold 3              | 0.865           | 0.910         | 1.391       | 0.580      |
-| Fold 4              | 0.815           | 0.840         | 2.063       | 1.399      |
-| Fold 5              | 0.825           | 0.840         | 2.141       | 1.499      |
-| Best fold           | 0.865           | 0.910         | 1.391       | 0.580      |
+| Fold 1              | 0.175           | 0.         | 7.677       |       |
+| Fold 2              | 0.190           | 0.         | 7.153       |       |
+| Fold 3              | 0.175           | 0.         | 7.116       |       |
+| Fold 4              | 0.195           | 0.         | 7.457       |       |
+| Fold 5              | 0.220           | 0.         | 7.338       |       |
+| Best fold           | 0.220           | 0.         | 7.339       |       |
 |                     |                 |               |             |            |
-| Average             | 0.831           | 0.859         | 1.902       | 1.131      |
-| Standard deviation  | 0.024           | 0.027         | 0.323       | 0.321      |
-| Standard mean error | 0.011           | 0.012         | 0.144       | 0.144      |
+| Average             | 0.191           | 0.         | 7.348       |       |
+| Standard deviation  | 0.017           | 0.         | 0.206       |       |
+| Standard mean error | 0.008           | 0.         | 0.092       |       |
 
-TODO FIX RESULTS
+TODO FIX RESULTS FOR LF
 
 TODO SAY SOMETHING ABOUT RESULTS AFTER WE GET THE CORRECT RESULTS
 
@@ -240,18 +240,18 @@ TODO SAY SOMETHING ABOUT RESULTS AFTER WE GET THE CORRECT RESULTS
 
 | Fold                | Accuracy (BERT) | Accuracy (LF) | Loss (BERT) | Loss (LF)  |
 |---------------------|-----------------|---------------|-------------|------------|
-| Fold 1              | 0.850           | 0.850         | 1.743       | 1.406      |
-| Fold 2              | 0.795           | 0.795         | 2.135       | 1.805      |
-| Fold 3              | 0.865           | 0.865         | 1.504       | 1.250      |
-| Fold 4              | 0.815           | 0.820         | 2.193       | 1.806      |
-| Fold 5              | 0.820           | 0.830         | 1.864       | 1.653      |
-| Best fold           | 0.865           | 0.865         | 1.504       | 1.250      |
+| Fold 1              | 0.250           | 0.         | 6.876       |       |
+| Fold 2              | 0.245           | 0.         | 7.695       |       |
+| Fold 3              | 0.285           | 0.         | 6.980       |       |
+| Fold 4              | 0.260           | 0.         | 7.544       |       |
+| Fold 5              | 0.265           | 0.         | 6.707       |       |
+| Best fold           | 0.285           | 0.         | 6.980       |       |
 |                     |                 |               |             |            |
-| Average             | 0.829           | 0.832         | 1.888       | 1.584      |
-| Standard deviation  | 0.025           | 0.024         | 0.254       | 0.222      |
-| Standard mean error | 0.011           | 0.011         | 0.114       | 0.099      |
+| Average             | 0.261           | 0.         | 7.160       |       |
+| Standard deviation  | 0.014           | 0.         | 0.388       |       |
+| Standard mean error | 0.006           | 0.         | 0.174       |       |
 
-TODO FIX RESULTS
+TODO FIX RESULTS FOR LF
 
 TODO SAY SOMETHING ABOUT RESULTS AFTER WE GET THE CORRECT RESULTS
 
