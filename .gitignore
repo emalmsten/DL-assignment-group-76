@@ -1,0 +1,20 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+.idea/
+data_embeddings/
+test.py
+*.json
+/json_info/
+*.csv
+/checkpoints
+
+/extractor
+/token_analyzer
+__pycache__/
