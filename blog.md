@@ -35,7 +35,7 @@ In the context of malware analysis, Longformer’s improvement over BERT in unde
 There are two main ways of analysing malware, static analysis and dynamic analysis. Static analysis is based on all the features of a piece of malware that can be extracted without running it. This includes textual analysis of the code and finding specific sequences like certain print messages or URLs accessed. Additionally, it can analyse linked libraries and other metadata, or find packed/encrypted code. Dynamic analysis requires running the program and analysing its runtime behaviour. This can extract features like what functions are called, tracking the values of parameters and the machine instructions executed by the program. [1]
 
 ## Methodology
-For both models, we will be running static analysis and dynamic analysis separately. We will then compare the results of both models to see which model performs better. To reduce variance in our accuracy and loss metrics, we will be using cross-validation to test our models. We will be running 5 folds, where each fold will test a completely disjoint 20% of the data. For both the loss and accuracy, we will report on the average, standard deviation and standard error of the mean.
+For both models, we will be running static analysis and dynamic analysis separately. We will then compare the results of both models to see which model performs better. To reduce variance in our accuracy and loss metrics, we will be using cross-validation to test our models. We will be running 5 folds, where each fold will test a completely disjoint 20% of the data. Each fold will consist of 7 training epochs. For both the loss and accuracy, we will report on the average, standard deviation and standard error of the mean.
 
 ### Task division
 The tasks are divided as follows:
@@ -229,6 +229,8 @@ For the Longformer model, training the model was not feasible within Kaggle’s 
 | Standard deviation  | 0.020    | 0.027 |
 | Standard mean error | 0.009    | 0.012 |
 
+The tables above show the results of the BERT model on both the static and behavior features. Due to the small number of epochs (7) per fold, the obtained accuracy is not very high.
+
 #### Static analysis on 1000 samples with both models:
 
 | Fold                | Accuracy (BERT) | Accuracy (LF) | Loss (BERT) | Loss (LF) |
@@ -244,7 +246,8 @@ For the Longformer model, training the model was not feasible within Kaggle’s 
 | Standard deviation  | 0.017           | 0.036         | 0.206       | 0.258     |
 | Standard mean error | 0.008           | 0.016         | 0.092       | 0.115     |
 
-TODO SAY SOMETHING ABOUT RESULTS AFTER WE GET THE CORRECT RESULTS
+The table above shows the performance of the BERT and Longformer models on a reduced static features data-set (1000 samples each). For the sake of consistency, we use the same 1000 samples for both models. The results show that the Longformer model performs better than the BERT model on the reduced data-set. 
+While these results are in line with our hypothesis, we cannot draw many reliable conclusions from these experiments due to the small data-set and the relatively high number of families (labels). Once again, the small number of epochs per fold further explains the low accuracy.  
 
 #### Dynamic analysis on 1000 samples with both models:
 
@@ -261,7 +264,8 @@ TODO SAY SOMETHING ABOUT RESULTS AFTER WE GET THE CORRECT RESULTS
 | Standard deviation  | 0.014           | 0.020         | 0.388       | 0.386     |
 | Standard mean error | 0.006           | 0.009         | 0.174       | 0.173     |
 
-TODO SAY SOMETHING ABOUT RESULTS AFTER WE GET THE CORRECT RESULTS
+The table above shows the performance of the BERT and Longformer models on a reduced behavior features data-set (1000 samples each). For the sake of consistency, we use the same 1000 samples for both models. The results show that the Longformer model performs slightly better than the BERT model on the reduced data-set, however the difference in performance is not as large as the static features data-set. 
+Once again, we cannot draw many reliable conclusions from these experiments due to the small data-set and the relatively high number of families (labels). The small number of epochs per fold further explains the low accuracy.  
 
 ## Conclusion/Future work
 TODO AFTER ACTUAL RESULTS
