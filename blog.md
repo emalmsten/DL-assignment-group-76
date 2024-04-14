@@ -1,34 +1,35 @@
+
 # Comparing Longformer and BERT in static and dynamic malware analysis
 Arnav Chopra, 5234786, A.Chopra-1@student.tudelft.nl
 
 Casper Dekeling, 5275881, C.R.Dekeling@student.tudelft.nl
 
-Emil Malmsten, xxxxxxx, xxxxx@student.tudelft.nl
+Emil Malmsten, 5256941, e.l.malmsten@student.tudelft.nl
 
 ## Introduction
 As technology develops, so does malware. Malware is continuously evolving, with small mutations and obfuscations constantly being added to existing malware to make more malware that is harder to detect. However, this means that most malware has evolved from one of relatively few families of malware. As seen in [1], where malware is visualised as gray-scale images, all the malware within such a family still has a lot in common. Knowing what family every piece of malware originated from would help us understand how these families evolve to generate new malware, which in turn will help us detect new malware. 
 
-In this project, we will use advanced natural language processing models, specifically, the BERT [2] model and Longformer [3] model, to predict what family a piece of malware originated from, based on features extracted from the software. Our goal is to establish empirically the differences in performance for this task between the Longformer model and the BERT model to see which model performs best on this task. In this blog post, we will give a brief introduction to the BERT and Longformer models, as well as a description of the procedures we took to train, test, and compare the models.
+In this project, we will use advanced NLP (Natural Language Processing) models, specifically, the BERT (Bidirectional Encoder Representations from Transformers) [2] model and Longformer [3] model, to predict what family a piece of malware originated from, based on features extracted from the software. Our goal is to establish empirically the differences in performance for this task between the Longformer model and the BERT model to see which model performs best on this task. In this blog post, we will give a brief introduction to the BERT and Longformer models, as well as a description of the procedures we took to train, test, and compare the models.
 
 ## Background
-### Transformer models
-The Transformer architecture, introduced in [4] has revolutionised the field of natural language processing. It serves as the foundation for BERT and Longformer, but also models like GPT (Generative Pretrained Transformer). It provides a way to handle sequential data without relying on recurrent or convolutional neural networks. 
+### Transformer Models
+The Transformer architecture, introduced in [4] has revolutionised the field of NLP. It serves as the foundation for BERT and Longformer, but also models like GPT (Generative Pretrained Transformer). It provides a way to handle sequential data without relying on recurrent or convolutional neural networks. 
 
 The key feature of the Transformer architecture is the self-attention mechanism. This allows each element in the input to interact with every other element. For each element, this will calculate a set of attention scores, indicating how important other parts of the input are when encoding that particular element. This enables the model to capture relationships in the data, independent of their distance within the sequence. It further enhances this by using multi-head attention, which is where multiple attention mechanisms are run in parallel, each focusing on a different part of the input sequence. The model then combines the results from these attention mechanisms to get a better understanding of the input.
 
 The Transformer architecture has had a significant impact on the field of NLP, but has also been adapted to multiple other tasks, such as image processing and reinforcement learning. Its ability to efficiently process sequences and capture long-distance dependencies makes it very viable in translation, text summarisation, question answering and more. 
 
-BERT (Bidirectional Encoder Representations from Transformers) and Longformer are two very prominent Transformer models because of their ability to understand and generate human language. These models have not only revolutionised how machines understand language, but have also been used to analyse complex data structures, such as code within the field of cybersecurity. 
+BERT and Longformer are two very prominent Transformer models because of their ability to understand and generate human language. These models have not only revolutionised how machines understand language, but have also been used to analyse complex data structures, such as code within the field of cybersecurity. 
 
-In the realm of natural language processing (NLP), two models have risen to prominence for their remarkable ability to understand, interpret, and generate human language: BERT (Bidirectional Encoder Representations from Transformers) and Longformer. These models have not only revolutionized how machines understand human language but have also opened up new avenues for analyzing complex data structures, such as code in cybersecurity applications. Understanding the capabilities and relationship between BERT and Longformer is crucial for appreciating their innovative application in malware analysis.
+In the realm of NLP, two models have risen to prominence for their remarkable ability to understand, interpret, and generate human language: BERT and Longformer. These models have not only revolutionized how machines understand human language but have also opened up new avenues for analyzing complex data structures, such as code in cybersecurity applications. Understanding the capabilities and relationship between BERT and Longformer is crucial for appreciating their innovative application in malware analysis.
 
 ### BERT
 Developed by Google, BERT is considered a significant leap in the ability of machines to understand human language. At its core, BERT uses the transformer architecture to understand the context of each word in a sentence, instead of interpreting each word separately. Its success in NLP tasks such as sentence completion and question answering makes it a foundational model for further NLP advancements.
 
 ### Longformer
-While BERT has shown exceptional performance in NLP tasks by understanding context, it is limited in its input size. The transformer model it relies on is computationally intensive, making it impractical for processing long input sequences. This is the problem that Longformer solves, a model that is designed to overcome this limitation by extending the Transformer model’s ability to handle longer texts. It achieves this by using a modified attention mechanism that is sparse; it focuses on specific segments of the input while ignoring others, reducing the computational cost. This allows Longformer to keep the contextual understanding of BERT while being more efficient at processing significantly longer input sequences. Since our inputs will be malware programs, which are usually quite large, we expect Longformer to perform better than BERT in being able to classify the different malware families.
+While BERT has shown exceptional performance in NLP tasks by understanding context, it is limited in its input size. The transformer model it relies on is computationally intensive, making it impractical for processing long input sequences. This is the problem that Longformer solves, a model that is designed to overcome this limitation by extending the Transformer model’s ability to handle longer texts. It achieves this by using a modified attention mechanism that is sparse; it focuses on specific segments of the input while ignoring others, reducing the computational cost. This allows Longformer to keep the contextual understanding of BERT while being more efficient at processing significantly longer input sequences. Since our inputs will be the behavior and features of malware programs, which are usually quite large, we expect Longformer to perform better than BERT in being able to classify the different families.
 
-### Malware analysis
+### Malware Analysis
 In the context of malware analysis, Longformer’s improvement over BERT in understanding longer input sequences is especially important, as malware code is often complex and lengthy. By using a contextual understanding of the input, Longformer allows for new ways of analysing malware, discovering patterns, features and relationships that traditional methods might miss. This use of NLP technology to analyse malware shows its usefulness beyond the original purpose of the models.
 
 There are two main ways of analysing malware, static analysis and dynamic analysis. Static analysis is based on all the features of a piece of malware that can be extracted without running it. This includes textual analysis of the code and finding specific sequences like certain print messages or URLs accessed. Additionally, it can analyse linked libraries and other metadata, or find packed/encrypted code. Dynamic analysis requires running the program and analysing its runtime behaviour. This can extract features like what functions are called, tracking the values of parameters and the machine instructions executed by the program. [same one as intro paragraph again]
@@ -51,10 +52,14 @@ The tasks are divided as follows:
   - Use logistic regression as the classifier for both Longformer models
   - Write blog post
 - Emil Malmsten
-  - TODO
+  - Set up the training loop
+  - Set up the data processing for the static features
+  - Made the truncation for both static and behaviour features
+  - Setup the code for running on Google Cloud (which later was not used)
+  - Write the truncation part of the blog-post
 
 ## Truncation
-Whereas Longformer is made to support very long input samples, namely of 4096 tokens, some of our input samples still exceeded this. For BERT, which can handle samples of 512 tokens, even more samples exceeded this. Therefore, the data needs to be truncated in a meaningful way, that keeps as much relevant information as possible. 
+Whereas Longformer is made to support long input samples, namely of 4096 tokens, some of our input samples still exceeded this. For BERT, which can handle samples of 512 tokens, even more samples were too large. Therefore, the data needs to be truncated in a meaningful way, that keeps as much relevant information as possible. 
 
 Our approach to truncating data involved initially conducting truncations that only minimally reduced the informational content of the JSON string across all samples, such as removing unnecessary whitespace and shortening key names. Thereafter, for samples exceeding the permissible token count, truncations with information loss were performed, since you can only compress so much without losing information. We did, however, aim to minimize this loss while achieving the required size. 
 
@@ -99,7 +104,7 @@ New sequences within these names are typically separated by dashes, underscores,
 This truncation strategy significantly reduced the average token count to 622, and only seven entries remained above 4,096 tokens. Additionally, over 10,000 entries were reduced to below 512 tokens.
 
 #### 4. Categorize by Extension
-Not only for directories do we have a lot of repetition, but for extensions as well. This step categorizies all f-lists (the inner most files list) into dictonaries as well depending on file type. An example would be:
+Not only for directories do we have a lot of repetition, but for extensions as well. This step categorizies all f-lists (the innermost files list) into dictonaries as well depending on file type. An example would be:
 a.txt
 b.txt
 d.dll
@@ -193,7 +198,7 @@ Our implementation will be hosted on Kaggle, an online platform with GPU’s ava
 ### Challenges encountered
 The biggest challenge we encountered was Kaggle’s hardware limitations in combination with our large dataset. Each user gets 30 hours of GPU time per week, and each experiment is stopped after running for 12 hours. 
 For the BERT model, training and testing the model using cross-validation took 17 hours each, for both the static and dynamic analysis. This meant the experiments had to be spread out over 2 people to be completed in one week, and each person had to split the cross-validation into two experiments. We use seeded randomisation to ensure that the test set of each fold was completely disjoint from the others. 
-For the Longformer model, training the model was not feasible within Kaggle’s hardware capabilities. Each input sample for Longformer is 8 times larger than for BERT, and even though Longformer is specially designed for handling larger input efficiently, it still takes substantially longer to run each fold. To solve this, we attempted to run a modified experiment, where we run only a forward pass on the data without training the model, and instead of using the fully connected linear layer to classify the data, we use the outputs of the hidden layers and use a logistic regression classifier to classify the data. However, this also required too much resources. As our final solution, we went back to the original plan, of training and testing the model with cross-validation, but with a substantially smaller data size. We limited the data set to 1000 randomly generated samples, instead of the full data size, which had 103883 samples for the static analysis, and 90806 for the dynamic analysis. To give a fair comparison, we also ran BERT with the same 1000 samples. We will however still show the results of the experiments with the full datasets for BERT.
+For the Longformer model, training the model was not feasible within Kaggle’s hardware capabilities. Each input sample for Longformer is 8 times larger than for BERT, and even though Longformer is designed for handling larger input efficiently, it still takes substantially longer to run each fold. To solve this, we attempted to run a modified experiment, where we ran only a forward pass on the data without training the model, and instead of using the fully connected linear layer to classify the data, we used the outputs of the hidden layers and use a logistic regression classifier to classify the data. However, this also required too much resources. As our final solution, we went back to the original plan, of training and testing the model with cross-validation, but with a substantially smaller data size. We limited the data set to 1000 randomly generated samples, instead of the full data size, which had 103883 samples for the static analysis, and 90806 for the dynamic analysis. To give a fair comparison, we also ran BERT with the same 1000 samples. We will however still show the results of the experiments with the full datasets for BERT.
 
 ## Results
 #### Static analysis on full dataset with BERT:
@@ -282,4 +287,5 @@ https://doi.org/10.48550/arXiv.2004.05150
 
 [4] Vaswani, A., Shazeer, N., Parmar, N., et al. Attention Is All You Need (2017). 
 https://doi.org/10.48550/arXiv.1706.03762
+
 
