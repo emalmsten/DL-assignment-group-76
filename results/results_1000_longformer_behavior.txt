@@ -1,0 +1,12 @@
+Best fold: 3
+
+Accuracies: [0.285, 0.245, 0.3, 0.29, 0.26]
+Average: 0.276
+Standard deviation: 0.02
+Standard error of the mean: 0.009
+Best accuracy: 0.3
+
+Losses: [6.598, 7.486, 6.753, 7.34, 6.574]
+Average: 6.95
+Standard deviation: 0.386
+Standard error of the mean: 0.173
