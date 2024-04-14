@@ -43,13 +43,13 @@ The tasks are divided as follows:
   - Extract embeddings for all models
   - Run static analysis on Bert model
   - Setup Kaggle environment
-  - Initial parsing for dynamic analysis
-  - Run Longformer experiments on reduced data for both datasets
+  - Initial data processing for behavior features
+  - Run experiments on reduced data for both datasets and both models
 - Casper Dekeling
   - Implement cross-validation
   - Run static analysis on Longformer model
   - Run dynamic analysis on Longformer model
-  - Use logistic regression as the classifier for both Longformer models
+  - Use logistic regression as the classifier for both Longformer models (which later was not used)
   - Write blog post
 - Emil Malmsten
   - Set up the training loop
@@ -231,39 +231,35 @@ For the Longformer model, training the model was not feasible within Kaggle’s 
 
 #### Static analysis on 1000 samples with both models:
 
-| Fold                | Accuracy (BERT) | Accuracy (LF) | Loss (BERT) | Loss (LF)  |
-|---------------------|-----------------|---------------|-------------|------------|
-| Fold 1              | 0.175           | 0.         | 7.677       |       |
-| Fold 2              | 0.190           | 0.         | 7.153       |       |
-| Fold 3              | 0.175           | 0.         | 7.116       |       |
-| Fold 4              | 0.195           | 0.         | 7.457       |       |
-| Fold 5              | 0.220           | 0.         | 7.338       |       |
-| Best fold           | 0.220           | 0.         | 7.339       |       |
-|                     |                 |               |             |            |
-| Average             | 0.191           | 0.         | 7.348       |       |
-| Standard deviation  | 0.017           | 0.         | 0.206       |       |
-| Standard mean error | 0.008           | 0.         | 0.092       |       |
-
-TODO FIX RESULTS FOR LF
+| Fold                | Accuracy (BERT) | Accuracy (LF) | Loss (BERT) | Loss (LF) |
+|---------------------|-----------------|---------------|-------------|-----------|
+| Fold 1              | 0.175           | 0.3           | 7.677       | 7.015     |
+| Fold 2              | 0.190           | 0.285         | 7.153       | 6.312     |
+| Fold 3              | 0.175           | 0.25          | 7.116       | 6.723     |
+| Fold 4              | 0.195           | 0.28          | 7.457       | 6.792     |
+| Fold 5              | 0.220           | 0.36          | 7.338       | 6.405     |
+| Best fold           | 0.220           | 0.36          | 7.339       | 6.405     |
+|                     |                 |               |             |           |
+| Average             | 0.191           | 0.295         | 7.348       | 6.649     |
+| Standard deviation  | 0.017           | 0.036         | 0.206       | 0.258     |
+| Standard mean error | 0.008           | 0.016         | 0.092       | 0.115     |
 
 TODO SAY SOMETHING ABOUT RESULTS AFTER WE GET THE CORRECT RESULTS
 
 #### Dynamic analysis on 1000 samples with both models:
 
-| Fold                | Accuracy (BERT) | Accuracy (LF) | Loss (BERT) | Loss (LF)  |
-|---------------------|-----------------|---------------|-------------|------------|
-| Fold 1              | 0.250           | 0.         | 6.876       |       |
-| Fold 2              | 0.245           | 0.         | 7.695       |       |
-| Fold 3              | 0.285           | 0.         | 6.980       |       |
-| Fold 4              | 0.260           | 0.         | 7.544       |       |
-| Fold 5              | 0.265           | 0.         | 6.707       |       |
-| Best fold           | 0.285           | 0.         | 6.980       |       |
-|                     |                 |               |             |            |
-| Average             | 0.261           | 0.         | 7.160       |       |
-| Standard deviation  | 0.014           | 0.         | 0.388       |       |
-| Standard mean error | 0.006           | 0.         | 0.174       |       |
-
-TODO FIX RESULTS FOR LF
+| Fold                | Accuracy (BERT) | Accuracy (LF) | Loss (BERT) | Loss (LF) |
+|---------------------|-----------------|---------------|-------------|-----------|
+| Fold 1              | 0.250           | 0.285         | 6.876       | 6.598     |
+| Fold 2              | 0.245           | 0.245         | 7.695       | 7.486     |
+| Fold 3              | 0.285           | 0.300         | 6.980       | 6.753     |
+| Fold 4              | 0.260           | 0.290         | 7.544       | 7.340     |
+| Fold 5              | 0.265           | 0.260         | 6.707       | 6.574     |
+| Best fold           | 0.285           | 0.300         | 6.980       | 6.753     |
+|                     |                 |               |             |           |
+| Average             | 0.261           | 0.276         | 7.160       | 6.950     |
+| Standard deviation  | 0.014           | 0.020         | 0.388       | 0.386     |
+| Standard mean error | 0.006           | 0.009         | 0.174       | 0.173     |
 
 TODO SAY SOMETHING ABOUT RESULTS AFTER WE GET THE CORRECT RESULTS
 
