@@ -268,9 +268,7 @@ The table above shows the performance of the BERT and Longformer models on a red
 Once again, we cannot draw many reliable conclusions from these experiments due to the small data-set and the relatively high number of families (labels). The small number of epochs per fold further explains the low accuracy.  
 
 ## Conclusion/Future work
-TODO AFTER ACTUAL RESULTS
-
-TODO SAY SOMETHING ABOUT HOW USEFUL NLP IS FOR MALWARE ANALYSIS
+We can see from the results that Longformer does outperform BERT, but not as significantly as we expected. We do however note that the results and conclusions drawn from these results have to be taken with a grain of salt, as they are ran on a small dataset due to hardware constraints. To make definitive statements about the effectiveness of NLP models in malware analysis, we would need to run the full experiment for the Longformer model.
 
 ### Future work
 Further experiments can be run using the Longformer model which use more resources, to run the full experiment as it was intended, training and testing the model with cross-validation, and using the intended classification layer instead of the logistic regression model.
